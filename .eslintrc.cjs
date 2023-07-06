@@ -14,6 +14,7 @@ module.exports = {
     "react/prop-types": "off",
     "no-unused-vars": "warn",
     "react/jsx-key": "warn",
-    "no-undef": "off"
+    "no-undef": "off",
+    "react/no-unknown-property": "off"
   },
 };
