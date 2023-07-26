@@ -30,23 +30,9 @@ body {
   }
 
   &__items {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 11px;
-    grid-row-gap: 20px;
-
-    @media (max-width: 1440px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (max-width: 1020px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(1, 1fr);
-    }
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
   }
 
   &__top {

@@ -2,10 +2,9 @@ import React from 'react';
 import PaginationItem from '@mui/material/Pagination';
 import styles from './Pagination.module.scss';
 
-
-export default function Pagination({ setCurrentPage }) {
+export default function Pagination({ onChangePage }) {
   const handlePageChange = (_, page) => {
-    setCurrentPage(page);
+    onChangePage(page);
   };
   return (
     <div className={styles.root}>
