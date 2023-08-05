@@ -1,26 +1,43 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
+import { selectSort, setSort } from '../redux/slices/filterSlice';
+
+export const sortMenu = [
+  { name: 'Популярности', sortParam: 'rating' },
+  { name: 'Цене (Возрастание)', sortParam: 'price' },
+  { name: 'Цене (Убывание)', sortParam: '-price' },
+  { name: 'Алфавиту', sortParam: 'title' },
+];
 
 export default function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const sortRef = React.useRef();
+  const sort = useSelector(selectSort);
   const [open, setOpen] = React.useState(false);
-
-  const menu = [
-    { name: 'Популярности', sortParam: 'rating' },
-    { name: 'Цене (Возрастание)', sortParam: 'price' },
-    { name: 'Цене (Убывание)', sortParam: '-price' },
-    { name: 'Алфавиту', sortParam: 'title' },
-  ];
 
   const onClickSortItem = (obj) => {
     dispatch(setSort(obj));
     setOpen(!open);
   };
 
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      const composed = event.composedPath();
+      if (!composed.includes(sortRef.current)) {
+        setOpen(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOutside)
+    
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside)
+    }
+
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -39,7 +56,7 @@ export default function Sort() {
       {open && (
         <div className="sort__popup">
           <ul>
-            {menu.map((obj, index) => {
+            {sortMenu.map((obj, index) => {
               return (
                 <li
                   className={sort.sortParam === obj.sortParam ? 'active' : ''}

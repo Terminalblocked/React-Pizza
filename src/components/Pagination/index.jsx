@@ -1,4 +1,3 @@
-import React from 'react';
 import PaginationItem from '@mui/material/Pagination';
 import styles from './Pagination.module.scss';
 
